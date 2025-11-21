@@ -18,7 +18,7 @@ export default ({ src, alt, text, linkPath }: Props) => {
 	return (
 		<Button
 			asChild
-			className={`rounded-none ${defaultBg} hover:bg-figma-navbar-highlighted`}
+			className={`rounded-none ${defaultBg} hover:rounded-none hover:bg-figma-navbar-highlighted`}
 		>
 			<Link className="flex h-fit flex-col gap-2" href={linkPath}>
 				<Image src={src} alt={alt} />

@@ -14,7 +14,7 @@ export default function WorkoutsPage() {
 					className="flex flex-row gap-4 text-xl"
 				>
 					<Image src={zapPath} alt="zap icon" />
-					<span>Quick Workout</span>
+					<span>Quick Start</span>
 				</Link>
 			</Button>
 			<h1 className="font-medium text-4xl">Workouts</h1>

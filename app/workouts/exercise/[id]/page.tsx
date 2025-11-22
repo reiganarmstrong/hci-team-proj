@@ -35,7 +35,7 @@ export default function ExerciseDetailsPage() {
 	return (
 		<div className="min-h-screen bg-background pb-24">
 			{/* Header */}
-			<div className="border-b border-border bg-background p-4">
+			<div className="border-border border-b bg-background p-4">
 				<div className="flex items-center gap-4">
 					<Link
 						href="/workouts/add-exercise"
@@ -73,7 +73,7 @@ export default function ExerciseDetailsPage() {
 				{exercise.notes && (
 					<section className="mb-6">
 						<h2 className="mb-3 font-semibold text-xl">Notes</h2>
-						<p className="text-sm leading-relaxed text-foreground/80">
+						<p className="text-foreground/80 text-sm leading-relaxed">
 							{exercise.notes}
 						</p>
 					</section>

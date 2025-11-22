@@ -1,0 +1,15 @@
+{
+	"linter": {
+		"rules": {
+			"nursery": {
+				"useSortedClasses": "warn"
+			}
+		}
+	},
+
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	}
+}

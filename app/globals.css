@@ -41,6 +41,9 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --color-figma-light-grey: var(--figma-light-grey);
+  --color-figma-dark-grey: var(--figma-dark-grey);
+  --color-figma-navbar-highlighted: var(--figma-navbar-highlighted);
 }
 
 :root {
@@ -76,6 +79,9 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --figma-dark-grey: oklch(0.8853 0 0);
+  --figma-light-grey: oklch(0.9431 0 0);
+  --figma-navbar-highlighted: oklch(0.3052 0 0);
 }
 
 .dark {

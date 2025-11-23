@@ -6,13 +6,6 @@ import { Card } from "@/components/ui/card";
 import ExerciseHeader, { type ExerciseHeaderProps } from "./exercise-header";
 import Sets from "./sets";
 
-const DefaultSetData = [
-	["SET", "BEST", "WEIGHT", "REPS", "DONE"],
-	[1, 155, 155, 5, false],
-	[2, 155, 155, 5, false],
-	[3, 155, 135, 5, false],
-];
-
 type AddSetAction = {
 	type: "add";
 };
@@ -50,7 +43,10 @@ const setDataReducer = (
 type Props = ExerciseHeaderProps;
 export default ({ nameText, restText, toolTipText }: Props) => {
 	const [setData, setDataDispatch] = useReducer(setDataReducer, [
-		...DefaultSetData,
+		["SET", "BEST", "WEIGHT", "REPS", "DONE"],
+		[1, 155, 155, 5, false],
+		[2, 155, 155, 5, false],
+		[3, 155, 135, 5, false],
 	]);
 	return (
 		<Card className="flex w-full flex-col rounded-none bg-figma-dark-grey p-5 lg:w-1/2">

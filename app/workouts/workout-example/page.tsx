@@ -1,7 +1,7 @@
 "use client";
 import { ChevronLeft, Clock, Plus } from "lucide-react";
 import Link from "next/link";
-import { type ReactNode, useState } from "react";
+import { memo, type ReactNode, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Exercise from "./_components/exercise";
 import TimeLeft from "./_components/time-left";
@@ -19,17 +19,20 @@ export default ({
 			return [...prev, <Exercise key={Math.random()} />];
 		});
 	};
+	const MemoizedHeading = memo(() => (
+		<span className="relative font-bold text-4xl">
+			<Link
+				href={"/workouts"}
+				className="-left-8 -translate-1/2 absolute top-1/2 inline-block h-fit w-fit"
+			>
+				<ChevronLeft width={30} height={30} />
+			</Link>
+			Quick Workout
+		</span>
+	));
 	return (
 		<div className="flex w-full flex-col items-center justify-center gap-4 p-8">
-			<span className="relative font-bold text-4xl">
-				<Link
-					href={"/workouts"}
-					className="-left-8 -translate-1/2 absolute top-1/2 inline-block h-fit w-fit"
-				>
-					<ChevronLeft width={30} height={30} />
-				</Link>
-				Quick Workout
-			</span>
+			<MemoizedHeading />
 			<div className="mb-5 flex w-full flex-col items-center justify-center gap-2">
 				<div className="flex w-full flex-row items-center justify-center gap-2 text-gray-500">
 					<Clock />

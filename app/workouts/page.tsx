@@ -7,7 +7,7 @@ import zapPath from "@/public/figma/Zap.svg";
 
 export default function WorkoutsPage() {
 	return (
-		<div className="flex min-h-screen flex-col items-center justify-center gap-8 p-8">
+		<div className="flex min-h-screen w-full flex-col items-center justify-center gap-8 p-8">
 			<Button asChild className="p-6">
 				<Link
 					href={"/workouts/workout-example"}

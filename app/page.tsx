@@ -129,13 +129,13 @@ export default function HomePage() {
             </p>
             <p className="mb-2 font-semibold text-muted-foreground text-sm">
               Tags: 
-              <span className="ml-2 rounded-full bg-green-100 px-2.5 py-0.5 font-medium text-green-700 text-xs">
+              <span className="ml-2 rounded-full bg-blue-100 px-2.5 py-0.5 font-medium text-blue-700 text-xs">
                 Pull
               </span>
-              <span className="ml-1 rounded-full bg-green-100 px-2.5 py-0.5 font-medium text-green-700 text-xs">
+              <span className="ml-1 rounded-full bg-blue-100 px-2.5 py-0.5 font-medium text-blue-700 text-xs">
                 Upper
               </span>
-              <span className="ml-1 rounded-full bg-green-100 px-2.5 py-0.5 font-medium text-green-700 text-xs">
+              <span className="ml-1 rounded-full bg-blue-100 px-2.5 py-0.5 font-medium text-blue-700 text-xs">
                 PPL
               </span>
             </p>

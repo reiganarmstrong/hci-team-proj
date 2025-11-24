@@ -123,7 +123,7 @@ export default function AddExercisePage() {
 	return (
 		<div className="flex min-h-screen flex-col bg-background pb-24">
 			{/* Header */}
-			<div className="border-b border-border bg-background p-4">
+			<div className="border-border border-b bg-background p-4">
 				<div className="flex items-center gap-4">
 					<Link href="/workouts" className="rounded-lg p-2 hover:bg-muted">
 						<ChevronLeft size={24} />
@@ -193,7 +193,7 @@ export default function AddExercisePage() {
 			{/* Exercise List */}
 			<div className="flex-1 overflow-y-auto">
 				{Object.entries(groupedExercises).map(([group, exercises]) => (
-					<div key={group} className="border-b border-border">
+					<div key={group} className="border-border border-b">
 						{/* Group Header - hide for alphabetical sort */}
 						{sortBy !== "alphabetical" && (
 							<button
@@ -220,10 +220,10 @@ export default function AddExercisePage() {
 										<div
 											key={`${group}-${exercise.id}`}
 											onClick={() => toggleExerciseSelection(exercise.id)}
-											className={`relative flex cursor-pointer items-center gap-3 border-t border-border p-4 transition-colors ${
+											className={`relative flex cursor-pointer items-center gap-3 border-border border-t p-4 transition-colors ${
 												isSelected
-													? "border-l-4 border-r-4 border-blue-500 bg-blue-50 hover:bg-blue-50"
-													: "border-l-4 border-r-4 border-transparent bg-muted/30 hover:bg-muted"
+													? "border-blue-500 border-r-4 border-l-4 bg-blue-50 hover:bg-blue-50"
+													: "border-transparent border-r-4 border-l-4 bg-muted/30 hover:bg-muted"
 											}`}
 										>
 											{/* Exercise Icon Placeholder */}
@@ -275,7 +275,7 @@ export default function AddExercisePage() {
 			</div>
 
 			{/* Add Selected Button */}
-			<div className="fixed right-0 bottom-16 left-0 border-t border-border bg-background p-4">
+			<div className="fixed right-0 bottom-16 left-0 border-border border-t bg-background p-4">
 				<button
 					type="button"
 					onClick={handleAddSelectedExercises}

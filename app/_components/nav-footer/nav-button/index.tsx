@@ -12,8 +12,9 @@ type Props = {
 };
 
 export default ({ src, alt, text, linkPath }: Props) => {
-	const pathname = usePathname();
-	const defaultBg = linkPath === pathname ? "bg-figma-navbar-highlighted" : "";
+	const pathname = usePathname().split("/")[1];
+	const defaultBg =
+		linkPath.split("/")[1] === pathname ? "bg-figma-navbar-highlighted" : "";
 	console.log(pathname);
 	return (
 		<Button

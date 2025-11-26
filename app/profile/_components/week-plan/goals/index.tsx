@@ -9,8 +9,8 @@ export default () => {
 	const [minWeight, _setMinWeight] = useState(getRandInt());
 	return (
 		<div className="flex w-full flex-col items-center justify-center gap-2">
-			<div className="w-full text-left font-medium text-2xl">Goals:</div>
-			<div className="flex w-full flex-col gap-4 text-center text-xl">
+			<div className="w-full text-left font-medium text-xl sm:text-2xl">Goals:</div>
+			<div className="flex w-full flex-col gap-3 text-center text-base sm:gap-4 sm:text-xl">
 				<GoalItem
 					circleContent="1"
 					textContent={`${minWeight}lbs on Bench Press`}

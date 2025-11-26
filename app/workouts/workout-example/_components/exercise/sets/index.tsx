@@ -11,22 +11,65 @@ type Props = {
 
 export default ({ rows, dispatch }: Props) => {
 	const RowValToJSX = (val: number | boolean, idx: number, rowIdx: number) => {
-		if (idx === 0 || idx === 3) {
+		if (idx === 0) {
+			// SET number - not editable
 			return (
-				<div key={Math.random()} className="col-span-1 font-semibold">
+				<div key={`${rowIdx}-${idx}`} className="col-span-1 font-semibold">
 					{val}
 				</div>
 			);
-		} else if (idx === 1 || idx === 2) {
+		} else if (idx === 1) {
+			// BEST - not editable
 			return (
-				<div key={Math.random()} className="col-span-1 font-semibold">
-					{val}lbs
+				<div key={`${rowIdx}-${idx}`} className="col-span-1 font-semibold">
+					{val}
+				</div>
+			);
+		} else if (idx === 2) {
+			// WEIGHT - editable
+			return (
+				<div key={`${rowIdx}-${idx}`} className="col-span-1 font-semibold">
+					<input
+						type="text"
+						inputMode="numeric"
+						value={val as number}
+						onChange={(e) => {
+							const input = e.target.value;
+							// Allow empty string or valid numbers
+							if (input === '' || /^\d+$/.test(input)) {
+								const newValue = input === '' ? 0 : parseInt(input);
+								dispatch({ type: "editValue", rowIdx, colIdx: idx, value: newValue });
+							}
+						}}
+						className="w-full bg-transparent text-center font-semibold outline-none"
+					/>
+				</div>
+			);
+		} else if (idx === 3) {
+			// REPS - editable
+			return (
+				<div key={`${rowIdx}-${idx}`} className="col-span-1 font-semibold">
+					<input
+						type="text"
+						inputMode="numeric"
+						value={val as number}
+						onChange={(e) => {
+							const input = e.target.value;
+							// Allow empty string or valid numbers
+							if (input === '' || /^\d+$/.test(input)) {
+								const newValue = input === '' ? 0 : parseInt(input);
+								dispatch({ type: "editValue", rowIdx, colIdx: idx, value: newValue });
+							}
+						}}
+						className="w-full bg-transparent text-center font-semibold outline-none"
+					/>
 				</div>
 			);
 		} else {
+			// Checkbox for DONE
 			return (
 				<div
-					key={Math.random()}
+					key={`${rowIdx}-${idx}`}
 					className="flex flex-col items-center justify-center"
 				>
 					<Checkbox
@@ -42,9 +85,9 @@ export default ({ rows, dispatch }: Props) => {
 	};
 	return (
 		<div className="grid w-full grid-cols-5 gap-3 text-center font-medium">
-			{rows[0].map((title) => {
+			{rows[0].map((title, idx) => {
 				return (
-					<div key={Math.random()} className="col-span-1 text-gray-700">
+					<div key={`header-${idx}`} className="col-span-1 text-gray-700">
 						{title}
 					</div>
 				);

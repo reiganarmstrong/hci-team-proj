@@ -13,26 +13,26 @@ export default () => {
 		{ day: "Sun", info: "R" },
 	] as const;
 	return (
-		<div className="flex flex-col items-center justify-center gap-2">
-			<div className="w-full text-left font-medium text-2xl">Week Plan:</div>
-			<Tabs defaultValue="Mon" className="w-full gap-10">
-				<TabsList className="min-h-fit min-w-fit bg-background">
+		<div className="flex w-full flex-col items-center justify-center gap-2">
+			<div className="w-full text-left font-medium text-xl sm:mx-auto sm:w-auto sm:text-2xl">Week Plan:</div>
+			<Tabs defaultValue="Mon" className="w-full gap-10 sm:mx-auto sm:w-auto">
+				<TabsList className="grid min-h-fit w-full grid-cols-7 gap-0.5 overflow-x-auto bg-background p-0 sm:flex sm:w-auto sm:min-w-fit">
 					{dayInfo.map((value, index) => {
-						let marginVal = "ml-1 mr-1";
+						let marginVal = "mx-0";
 						if (index === 0) {
-							marginVal = "mr-1";
+							marginVal = "mr-0";
 						} else if (index === dayInfo.length - 1) {
-							marginVal = "ml-1";
+							marginVal = "ml-0";
 						}
 						if (index % 2 === 0) {
 							return (
 								<TabsTrigger
 									value={value.day}
-									className={`${marginVal} rounded-none bg-figma-dark-grey pb-3 data-[state=active]:border-t-3 data-[state=active]:border-t-blue-400 data-[state=active]:bg-figma-dark-grey`}
+									className={`${marginVal} flex-1 rounded-none bg-figma-dark-grey p-2 pb-3 data-[state=active]:border-t-3 data-[state=active]:border-t-blue-400 data-[state=active]:bg-figma-dark-grey sm:flex-none sm:p-4`}
 									key={Math.random()}
 								>
-									<div className="flex flex-col gap-3">
-										<div className="text-xl">{value.day}</div>
+									<div className="flex flex-col gap-2 sm:gap-3">
+										<div className="text-sm sm:text-xl">{value.day}</div>
 										<CircleIcon content={value.info} />
 									</div>
 								</TabsTrigger>
@@ -41,11 +41,11 @@ export default () => {
 						return (
 							<TabsTrigger
 								value={value.day}
-								className={`${marginVal} rounded-none bg-figma-light-grey pb-3 data-[state=active]:border-t-3 data-[state=active]:border-t-blue-400 data-[state=active]:bg-figma-light-grey`}
+								className={`${marginVal} flex-1 rounded-none bg-figma-light-grey p-2 pb-3 data-[state=active]:border-t-3 data-[state=active]:border-t-blue-400 data-[state=active]:bg-figma-light-grey sm:flex-none sm:p-4`}
 								key={Math.random()}
 							>
-								<div className="flex flex-col gap-3">
-									<div className="text-xl">{value.day}</div>
+								<div className="flex flex-col gap-2 sm:gap-3">
+									<div className="text-sm sm:text-xl">{value.day}</div>
 									<CircleIcon content={value.info} />
 								</div>
 							</TabsTrigger>
@@ -54,7 +54,7 @@ export default () => {
 				</TabsList>
 				{dayInfo.map((value) => {
 					return (
-						<TabsContent value={value.day} key={Math.random()}>
+						<TabsContent value={value.day} key={Math.random()} className="w-full">
 							<Goals />
 						</TabsContent>
 					);

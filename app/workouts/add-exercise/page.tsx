@@ -116,8 +116,8 @@ export default function AddExercisePage() {
 	const handleAddSelectedExercises = () => {
 		// Save selected exercises to localStorage
 		saveSelectedExercisesToStorage(Array.from(selectedExercises));
-		// Navigate back to workouts
-		router.push("/workouts");
+		// Navigate back to the Quick Workout page
+		router.push("/workouts/workout-example");
 	};
 
 	return (
@@ -125,7 +125,7 @@ export default function AddExercisePage() {
 			{/* Header */}
 			<div className="border-border border-b bg-background p-4">
 				<div className="flex items-center gap-4">
-					<Link href="/workouts" className="rounded-lg p-2 hover:bg-muted">
+					<Link href="/workouts/workout-example" className="rounded-lg p-2 hover:bg-muted">
 						<ChevronLeft size={24} />
 					</Link>
 					<h1 className="font-semibold text-2xl">Add Exercise</h1>
@@ -134,9 +134,10 @@ export default function AddExercisePage() {
 				{/* Create Exercise Button */}
 				<button
 					type="button"
-					className="mt-4 w-full rounded-lg bg-primary py-3 font-medium text-primary-foreground"
+					disabled
+					className="mt-4 w-full rounded-lg bg-primary py-3 font-medium text-primary-foreground opacity-50 cursor-not-allowed"
 				>
-					+ Create Exercise
+					+ Create Exercise (In Progress)
 				</button>
 
 				{/* Search */}

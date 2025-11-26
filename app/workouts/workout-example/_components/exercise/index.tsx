@@ -1,5 +1,5 @@
 "use client";
-import { Dumbbell, Plus } from "lucide-react";
+import { Dumbbell, Plus, Minus } from "lucide-react";
 import { useReducer, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -10,13 +10,24 @@ type AddSetAction = {
 	type: "add";
 };
 
+type RemoveSetAction = {
+	type: "remove";
+};
+
 type EditCheckBoxState = {
 	type: "edit";
 	rowIdx: number;
 	value: boolean;
 };
 
-export type ReducerAction = AddSetAction | EditCheckBoxState;
+type EditValueAction = {
+	type: "editValue";
+	rowIdx: number;
+	colIdx: number;
+	value: number;
+};
+
+export type ReducerAction = AddSetAction | RemoveSetAction | EditCheckBoxState | EditValueAction;
 const setDataReducer = (
 	prev: (string[] | (number | boolean)[])[],
 	action: ReducerAction,
@@ -24,7 +35,25 @@ const setDataReducer = (
 	if (action.type === "edit") {
 		prev[action.rowIdx][4] = action.value;
 		return [...prev];
+	} else if (action.type === "editValue") {
+		prev[action.rowIdx][action.colIdx] = action.value;
+		return [...prev];
+	} else if (action.type === "remove") {
+		// Can't remove if only header + 1 set remain
+		if (prev.length <= 2) return prev;
+		
+		const newData: (string[] | (number | boolean)[])[] = [];
+		prev.forEach((arr, idx) => {
+			if (idx === 0) {
+				newData.push([...(arr as string[])]);
+			} else if (idx < prev.length - 1) {
+				// Copy all but the last set
+				newData.push([...(arr as (number | boolean)[])]);
+			}
+		});
+		return newData;
 	} else {
+		// add
 		const newData: (string[] | (number | boolean)[])[] = [];
 		prev.forEach((arr, idx) => {
 			if (idx === 0) {
@@ -43,7 +72,7 @@ const setDataReducer = (
 type Props = ExerciseHeaderProps;
 export default ({ nameText, restText, toolTipText }: Props) => {
 	const [setData, setDataDispatch] = useReducer(setDataReducer, [
-		["SET", "BEST", "WEIGHT", "REPS", "DONE"],
+		["SET", "BEST (lbs)", "WEIGHT (lbs)", "REPS", "DONE"],
 		[1, 155, 155, 5, false],
 		[2, 155, 155, 5, false],
 		[3, 155, 135, 5, false],
@@ -60,14 +89,26 @@ export default ({ nameText, restText, toolTipText }: Props) => {
 			</div>
 			<div className="flex w-full flex-col items-center justify-center gap-8">
 				<Sets rows={setData} dispatch={setDataDispatch} />
-				<Button
-					type="button"
-					className="w-full max-w-lg"
-					onClick={() => setDataDispatch({ type: "add" })}
-				>
-					<Plus />
-					Add Set
-				</Button>
+				<div className="flex w-full max-w-lg flex-col gap-2">
+					<Button
+						type="button"
+						className="w-full"
+						onClick={() => setDataDispatch({ type: "add" })}
+					>
+						<Plus />
+						Add Set
+					</Button>
+					<Button
+						type="button"
+						variant="outline"
+						className="w-full"
+						onClick={() => setDataDispatch({ type: "remove" })}
+						disabled={setData.length <= 2}
+					>
+						<Minus />
+						Remove Set
+					</Button>
+				</div>
 			</div>
 		</Card>
 	);

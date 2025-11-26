@@ -247,7 +247,7 @@ export default function WorkoutsPage() {
       {/* Content */}
       <div className="flex-1 overflow-auto p-4">
         {/* Quick Start Button */}
-        <Link href="/workout-example" className="block">
+        <Link href="/workouts/workout-example" className="block">
           <button
             type="button"
             className="mb-4 flex w-full items-center justify-center gap-2 rounded-lg bg-foreground py-3 font-medium text-background"
@@ -289,7 +289,7 @@ export default function WorkoutsPage() {
                     {folder.workouts.map((workout, idx) => (
                       <Link
                         key={idx}
-                        href="/workout-example"
+                        href="/workouts/workout-example"
                         className="block text-foreground no-underline"
                       >
                         <div className="flex items-center justify-between rounded-lg border border-border bg-muted/30 p-4 transition-colors hover:bg-muted">
@@ -336,7 +336,7 @@ export default function WorkoutsPage() {
               {filteredUncategorized.map((workout, idx) => (
                 <Link
                   key={idx}
-                  href="/workout-example"
+                  href="/workouts/workout-example"
                   className="block text-foreground no-underline"
                 >
                   <div className="flex items-center justify-between rounded-lg border border-border bg-muted/30 p-4 transition-colors hover:bg-muted">

@@ -5,8 +5,8 @@ import WeekPlan from "./_components/week-plan";
 
 export default function Home() {
 	return (
-		<div className="mt-10 mb-10 flex h-full w-full flex-col items-center justify-center gap-10">
-			<div className="flex flex-col items-center justify-center gap-2">
+		<div className="flex min-h-screen w-full flex-col bg-background pb-24">
+			<div className="flex flex-col items-center justify-center gap-4 p-4 pt-8">
 				<Image
 					src={account_circle_path}
 					width={100}
@@ -14,9 +14,11 @@ export default function Home() {
 					alt="profile picture"
 					className="col-span-full"
 				/>
-				<div className="font-medium text-4xl">First Last</div>
+				<div className="font-medium text-2xl sm:text-4xl">First Last</div>
 			</div>
-			<WeekPlan />
+			<div className="flex-1 overflow-auto px-4 pb-4">
+				<WeekPlan />
+			</div>
 		</div>
 	);
 }

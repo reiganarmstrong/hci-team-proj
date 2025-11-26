@@ -3,6 +3,7 @@ import type { Exercise } from "./types";
 // LocalStorage keys
 const EXERCISES_KEY = "fitness_app_exercises";
 const SELECTED_EXERCISES_KEY = "fitness_app_selected_exercises";
+const WORKOUT_EXERCISES_KEY = "fitness_app_workout_exercises";
 
 // Get exercises from localStorage
 export function getExercisesFromStorage(): Exercise[] {
@@ -48,6 +49,38 @@ export function saveSelectedExercisesToStorage(exerciseIds: string[]): void {
 		);
 	} catch (error) {
 		console.error("Error saving selected exercises to localStorage:", error);
+	}
+}
+
+// Get workout exercises (current workout session)
+export function getWorkoutExercisesFromStorage(): Exercise[] {
+	if (typeof window === "undefined") return [];
+	try {
+		const stored = localStorage.getItem(WORKOUT_EXERCISES_KEY);
+		return stored ? JSON.parse(stored) : [];
+	} catch (error) {
+		console.error("Error reading workout exercises from localStorage:", error);
+		return [];
+	}
+}
+
+// Save workout exercises (current workout session)
+export function saveWorkoutExercisesToStorage(exercises: Exercise[]): void {
+	if (typeof window === "undefined") return;
+	try {
+		localStorage.setItem(WORKOUT_EXERCISES_KEY, JSON.stringify(exercises));
+	} catch (error) {
+		console.error("Error saving workout exercises to localStorage:", error);
+	}
+}
+
+// Clear workout exercises (when finishing a workout)
+export function clearWorkoutExercises(): void {
+	if (typeof window === "undefined") return;
+	try {
+		localStorage.removeItem(WORKOUT_EXERCISES_KEY);
+	} catch (error) {
+		console.error("Error clearing workout exercises from localStorage:", error);
 	}
 }
 

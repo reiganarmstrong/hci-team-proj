@@ -1,6 +1,6 @@
 "use client";
+import { Minus, Pause, Play, Plus, RotateCcw } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Play, Pause, RotateCcw, Plus, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const convertSecondsToMinutesAndSeconds = (totalSeconds: number) => {
@@ -25,31 +25,34 @@ const getStoredTimerState = () => {
 	if (typeof window === "undefined") {
 		return { time: INITIAL_TIME, running: true };
 	}
-	
+
 	try {
 		const stored = localStorage.getItem(TIMER_STORAGE_KEY);
 		if (stored) {
 			const { time, running } = JSON.parse(stored);
-			return { time, running };
+			return {
+				time: parseInt(time as string, 10),
+				running: running === "true",
+			};
 		}
 	} catch (e) {
 		console.error("Error loading timer state:", e);
 	}
-	
+
 	return { time: INITIAL_TIME, running: true };
 };
 
 export default () => {
 	// Use lazy initialization to load from localStorage immediately
-	const [timeLeft, setTimeLeft] = useState(() => getStoredTimerState().time);
-	const [isRunning, setIsRunning] = useState(() => getStoredTimerState().running);
+	const [timeLeft, setTimeLeft] = useState(getStoredTimerState().time);
+	const [isRunning, setIsRunning] = useState(getStoredTimerState().running);
 
 	// Save timer state to localStorage whenever it changes
 	useEffect(() => {
 		if (typeof window !== "undefined") {
 			localStorage.setItem(
 				TIMER_STORAGE_KEY,
-				JSON.stringify({ time: timeLeft, running: isRunning })
+				JSON.stringify({ time: timeLeft, running: isRunning }),
 			);
 		}
 	}, [timeLeft, isRunning]);
@@ -57,7 +60,7 @@ export default () => {
 	// Timer countdown
 	useEffect(() => {
 		if (!isRunning || timeLeft <= 0) return;
-		
+
 		const interval = setInterval(() => {
 			setTimeLeft((val) => {
 				if (val <= 1) {
@@ -67,7 +70,7 @@ export default () => {
 				return val - 1;
 			});
 		}, 1000);
-		
+
 		return () => clearInterval(interval);
 	}, [isRunning, timeLeft]);
 
@@ -95,7 +98,10 @@ export default () => {
 
 	return (
 		<div className="flex flex-col items-center gap-3" suppressHydrationWarning>
-			<span className={`font-mono text-4xl font-bold ${timeLeft === 0 ? "text-red-500" : ""}`} suppressHydrationWarning>
+			<span
+				className={`font-mono text-4xl font-bold ${timeLeft === 0 ? "text-red-500" : ""}`}
+				suppressHydrationWarning
+			>
 				{convertSecondsToMinutesAndSeconds(timeLeft).formattedTime}
 			</span>
 			<div className="flex items-center gap-2">
@@ -108,19 +114,10 @@ export default () => {
 				>
 					<Minus size={16} />
 				</Button>
-				<Button
-					type="button"
-					size="sm"
-					onClick={handlePlayPause}
-				>
+				<Button type="button" size="sm" onClick={handlePlayPause}>
 					{isRunning ? <Pause size={16} /> : <Play size={16} />}
 				</Button>
-				<Button
-					type="button"
-					size="sm"
-					variant="outline"
-					onClick={handleReset}
-				>
+				<Button type="button" size="sm" variant="outline" onClick={handleReset}>
 					<RotateCcw size={16} />
 				</Button>
 				<Button

@@ -2,6 +2,7 @@
 import Image from "next/image";
 import account_circle_path from "@/public/figma/account_circle.png";
 import WeekPlan from "./_components/week-plan";
+import { ExpBar } from "@/components/ui/exp-bar";
 
 export default function Home() {
 	return (
@@ -15,6 +16,9 @@ export default function Home() {
 					className="col-span-full"
 				/>
 				<div className="font-medium text-2xl sm:text-4xl">First Last</div>
+				
+				{/* EXP Bar */}
+				<ExpBar />
 			</div>
 			<div className="flex-1 overflow-auto px-4 pb-4">
 				<WeekPlan />

@@ -16,7 +16,7 @@ export default function HomePage() {
         {/* Today */}
         <div className="mb-4">
           <p className="mb-2 font-semibold text-muted-foreground text-sm">Today:</p>
-          <Link href="/workouts" className="block text-foreground no-underline">
+          <Link href="/workouts/workout-example?preset=true" className="block text-foreground no-underline">
             <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-muted/30 p-4 shadow-sm transition-colors hover:bg-muted">
               <div className="flex-1">
                 <p className="mb-2 font-bold text-lg">Push B</p>
@@ -45,7 +45,7 @@ export default function HomePage() {
         {/* Tuesday */}
         <div className="mb-4">
           <p className="mb-2 font-semibold text-muted-foreground text-sm">Tuesday:</p>
-          <Link href="/workouts" className="block text-foreground no-underline">
+          <Link href="/workouts/workout-example?preset=true" className="block text-foreground no-underline">
             <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-muted/30 p-4 shadow-sm transition-colors hover:bg-muted">
               <div className="flex-1">
                 <p className="mb-2 font-bold text-lg">Pull B</p>

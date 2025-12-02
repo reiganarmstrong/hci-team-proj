@@ -17,6 +17,7 @@ import {
 	clearWorkoutExercises
 } from "@/lib/exercises-storage";
 import { calculateWorkoutExp, addExp } from "@/lib/exp-system";
+import { useWorkout } from "@/lib/workout-context";
 import type { Exercise as ExerciseType } from "@/lib/types";
 
 // Preset exercises for demo workouts
@@ -33,6 +34,11 @@ export default () => {
 	const [expData, setExpData] = useState({ expGained: 0, leveledUp: false, newLevel: 0, levelsGained: 0 });
 	const searchParams = useSearchParams();
 	const router = useRouter();
+	const { 
+		setHasActiveWorkout, 
+		setPendingNavigation, 
+		setShowWorkoutDialog 
+	} = useWorkout();
 	const isPreset = searchParams.get("preset") === "true";
 
 	// Load exercises from localStorage on mount
@@ -90,6 +96,11 @@ export default () => {
 		}
 	}, [isPreset]);
 
+	// Update active workout status based on exercises
+	useEffect(() => {
+		setHasActiveWorkout(workoutExercises.length > 0);
+	}, [workoutExercises, setHasActiveWorkout]);
+
 	// Save workout exercises whenever they change
 	useEffect(() => {
 		if (workoutExercises.length > 0) {
@@ -117,6 +128,8 @@ export default () => {
 		
 		// Clear the workout when finishing
 		clearWorkoutExercises();
+		setHasActiveWorkout(false);
+		
 		// Clear timer state
 		if (typeof window !== "undefined") {
 			localStorage.removeItem("fitness_app_timer_state");
@@ -128,11 +141,22 @@ export default () => {
 		// Navigate to home after closing notification
 		router.push("/");
 	};
+
+	const handleBackClick = (e: React.MouseEvent) => {
+		if (workoutExercises.length > 0) {
+			e.preventDefault();
+			setHasActiveWorkout(true);
+			setPendingNavigation("/workouts");
+			setShowWorkoutDialog(true);
+		}
+	};
+
 	const MemoizedHeading = memo(() => (
 		<span className="relative font-bold text-4xl">
 			<Link
 				href={"/workouts"}
 				className="-left-8 -translate-1/2 absolute top-1/2 inline-block h-fit w-fit"
+				onClick={handleBackClick}
 			>
 				<ChevronLeft width={30} height={30} />
 			</Link>
